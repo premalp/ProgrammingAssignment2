@@ -5,26 +5,26 @@
 
 makeCacheMatrix <- function(x = matrix()) {
 		if (ncol(x) != nrow(x)){
-			message("Matrix is not a square matrix...cannot proceed")
-      return(x)
+		        message("Matrix is not a square matrix...cannot proceed")
+                        return(x)
 		}
 		i<- NULL
 		set <- function(y){
-				x <<- y
-				i <<- NULL
+			x <<- y
+			i <<- NULL
 		}
 		get <- function() x
 		setInverseMatrix <- function(inverse) i <<- inverse
 		getInverseMatrix <- function(from_cacheSolve = FALSE) {
-        if (is.null(i) && from_cacheSolve != TRUE){
-            message("Please call function cacheSolve(Matrix_to_be_cached_and_inverted) after calling makeCacheMatrix or set function")
-            return(NULL)
-        } 
-        i
+                        if (is.null(i) && from_cacheSolve != TRUE){
+                                message("Please call function cacheSolve(Matrix_to_be_cached_and_inverted) after calling makeCacheMatrix or set function")
+                                return(NULL)
+                        } 
+                        i
 		}
 		list(set = set, get = get, 
-	  	  	setInverseMatrix = setInverseMatrix,
-	   		  getInverseMatrix = getInverseMatrix)
+	          	setInverseMatrix = setInverseMatrix,
+                        getInverseMatrix = getInverseMatrix)
 }
 
 
@@ -33,11 +33,11 @@ makeCacheMatrix <- function(x = matrix()) {
 ## should retrieve the inverse from the cache.
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+                ## Return a matrix that is the inverse of 'x'
 		i <- x$getInverseMatrix(TRUE)
 		if (!is.null(i)){
-					message("getting Cached Inverse of the matrix")
-					return(i)
+			message("getting Cached Inverse of the matrix")
+                        return(i)
 		}
 		data <- x$get()
 		i <- solve(data, ...)
